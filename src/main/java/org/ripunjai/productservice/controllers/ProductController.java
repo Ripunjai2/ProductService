@@ -17,7 +17,7 @@ public class ProductController {
         this.productService = productService;
     }
     @GetMapping("/{id}")
-    public String getSingleProduct(@PathVariable("id") Long productId) {
+    public Product getSingleProduct(@PathVariable("id") Long productId) {
         //Should we call FakeStore API here ? No, we should make a call to the Service.
         return productService.getSingleProduct(productId);
     }
@@ -25,7 +25,7 @@ public class ProductController {
     // localhost:8080/products/
     @GetMapping("/")
     public List<Product> getAllProducts() {
-        return new ArrayList<>();
+        return productService.getAllProducts();
     }
 
     // localhost:8080/products/

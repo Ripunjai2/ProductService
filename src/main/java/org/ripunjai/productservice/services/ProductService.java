@@ -5,7 +5,7 @@ import org.ripunjai.productservice.models.Product;
 import java.util.List;
 
 public interface ProductService {
-    String getSingleProduct(Long productId);
+    Product getSingleProduct(Long productId);
 
     List<Product> getAllProducts();
 

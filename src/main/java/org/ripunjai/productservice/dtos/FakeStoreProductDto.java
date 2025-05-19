@@ -1,16 +1,20 @@
-package org.ripunjai.productservice.models;
+package org.ripunjai.productservice.dtos;
 
-//import lombok.Getter;
-//import lombok.Setter;
-//
-//@Getter
-//@Setter
-public class Product extends BaseModel {
+public class FakeStoreProductDto {
+    private Long id;
     private String title;
     private Double price;
     private String description;
-    private String imageUrl;
-    private Category category;
+    private String image;
+    private String category;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -36,19 +40,19 @@ public class Product extends BaseModel {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 }
