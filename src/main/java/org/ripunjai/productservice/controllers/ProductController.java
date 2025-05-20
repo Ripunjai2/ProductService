@@ -1,7 +1,9 @@
 package org.ripunjai.productservice.controllers;
 
+import org.ripunjai.productservice.exceptions.ProductNotFoundException;
 import org.ripunjai.productservice.models.Product;
 import org.ripunjai.productservice.services.ProductService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +19,25 @@ public class ProductController {
         this.productService = productService;
     }
     @GetMapping("/{id}")
-    public Product getSingleProduct(@PathVariable("id") Long productId) {
-        //Should we call FakeStore API here ? No, we should make a call to the Service.
-        return productService.getSingleProduct(productId);
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
+//        return productService.getSingleProduct(productId);
+//        throw new RuntimeException("Something went wrong");
+        ResponseEntity<Product> responseEntity  =
+                new ResponseEntity<>(
+                        productService.getSingleProduct(productId),
+                        HttpStatus.OK
+                );
+
+//        Product product = null;
+//        try {
+//            product = productService.getSingleProduct(productId);
+//            responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
+//        } catch (RuntimeException e) {
+//            e.printStackTrace();
+//            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+
+        return responseEntity;
     }
 
     // localhost:8080/products/
@@ -29,9 +47,9 @@ public class ProductController {
     }
 
     // localhost:8080/products/
-    @PostMapping()
+    @PostMapping("/")
     public Product createProduct(@RequestBody Product product) {
-        return new Product();
+        return productService.createProduct(product);
     }
 
     @DeleteMapping("/{id}")

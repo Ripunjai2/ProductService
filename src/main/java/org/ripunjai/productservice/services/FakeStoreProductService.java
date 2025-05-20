@@ -1,6 +1,7 @@
 package org.ripunjai.productservice.services;
 
 import org.ripunjai.productservice.dtos.FakeStoreProductDto;
+import org.ripunjai.productservice.exceptions.ProductNotFoundException;
 import org.ripunjai.productservice.models.Category;
 import org.ripunjai.productservice.models.Product;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +21,16 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public Product getSingleProduct(Long productId) {
+    public Product getSingleProduct(Long productId) throws ProductNotFoundException {
         ResponseEntity<FakeStoreProductDto> fakeStoreProductDtoResponseEntity = restTemplate.getForEntity(
                 "https://fakestoreapi.com/products/" + productId,
                 FakeStoreProductDto.class);
 
                 FakeStoreProductDto fakeStoreProductDto = fakeStoreProductDtoResponseEntity.getBody();
+        if (fakeStoreProductDto == null) {
+            //Wrong product Id.
+            throw new ProductNotFoundException("Product with id " + productId + " doesn't exist.");
+        }
         return convertToProductFormat(fakeStoreProductDto);
     }
 
@@ -48,7 +53,15 @@ public class FakeStoreProductService implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
-        return null;
+        try{
+            if(product.getId() == null) {
+                throw new ProductNotFoundException("product invalid");
+            }
+            return null;
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
