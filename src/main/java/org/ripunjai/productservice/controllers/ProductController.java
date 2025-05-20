@@ -3,6 +3,7 @@ package org.ripunjai.productservice.controllers;
 import org.ripunjai.productservice.exceptions.ProductNotFoundException;
 import org.ripunjai.productservice.models.Product;
 import org.ripunjai.productservice.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,8 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    public ProductController(final ProductService productService) {
+    public ProductController(@Qualifier("selfProductService") ProductService productService) {
+//    public ProductController(ProductService productService) {
         this.productService = productService;
     }
     @GetMapping("/{id}")
