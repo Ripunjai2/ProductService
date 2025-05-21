@@ -1,5 +1,6 @@
 package org.ripunjai.productservice.controllers;
 
+import org.ripunjai.productservice.exceptions.CategoryNotFoundException;
 import org.ripunjai.productservice.exceptions.ProductNotFoundException;
 import org.ripunjai.productservice.models.Product;
 import org.ripunjai.productservice.services.ProductService;
@@ -49,8 +50,9 @@ public class ProductController {
     }
 
     // localhost:8080/products/
-    @PostMapping("/")
-    public Product createProduct(@RequestBody Product product) {
+    @PostMapping()
+    public Product createProduct(@RequestBody Product product) throws CategoryNotFoundException {
+        System.out.println("Starting from controller" +product);
         return productService.createProduct(product);
     }
 

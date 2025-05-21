@@ -13,6 +13,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findById(Long productId);
 
+    Product save(Product product);
+
+    @Override
+    void deleteById(Long productId);
+
     //select * from products where lower(title) LIKE '%iphone%'
     List<Product> findByTitleContainsIgnoreCase(String title);
 

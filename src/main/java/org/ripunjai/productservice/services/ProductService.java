@@ -1,5 +1,6 @@
 package org.ripunjai.productservice.services;
 
+import org.ripunjai.productservice.exceptions.CategoryNotFoundException;
 import org.ripunjai.productservice.exceptions.ProductNotFoundException;
 import org.ripunjai.productservice.models.Product;
 
@@ -10,7 +11,7 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    Product createProduct(Product product);
+    Product createProduct(Product product) throws CategoryNotFoundException;
 
     boolean deleteProduct(Long productId);
 }
