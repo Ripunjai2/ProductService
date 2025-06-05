@@ -40,17 +40,17 @@ public class SelfProductService implements ProductService {
     public Product createProduct(Product product) throws CategoryNotFoundException {
         try {
 
-            Category category = product.getCategory();
-//        if(product.getCategory() == null) {
-//            throw new CategoryNotFoundException("Product can't be listed without Category");
-//        }
-            Optional<Category> OptionalCategory = categoryRepository.findByTitle(product.getCategory().getTitle());
-            if(OptionalCategory.isEmpty()) {
-                category = categoryRepository.save(category);
-            } else {
-                category = OptionalCategory.get();
-            }
-            product.setCategory(category);
+//            Category category = product.getCategory();
+////        if(product.getCategory() == null) {
+////            throw new CategoryNotFoundException("Product can't be listed without Category");
+////        }
+//            Optional<Category> OptionalCategory = categoryRepository.findByTitle(product.getCategory().getTitle());
+//            if(OptionalCategory.isEmpty()) {
+//                category = categoryRepository.save(category);
+//            } else {
+//                category = OptionalCategory.get();
+//            }
+//            product.setCategory(category);
 
             Product savedProduct = productRepository.save(product);
             return savedProduct;

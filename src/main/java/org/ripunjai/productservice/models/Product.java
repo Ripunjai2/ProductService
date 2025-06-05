@@ -2,9 +2,7 @@ package org.ripunjai.productservice.models;
 
 //import lombok.Getter;
 //import lombok.Setter;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 //
 //@Getter
@@ -14,9 +12,10 @@ public class Product extends BaseModel {
     private String title;
     private Double price;
     private String description;
-    private String imageUrl;
-    @ManyToOne
+    private String imgUrl;
 //    @JoinColumn(name = "category_id")
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn
     private Category category;
 
     public String getTitle() {
@@ -43,12 +42,12 @@ public class Product extends BaseModel {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public Category getCategory() {
